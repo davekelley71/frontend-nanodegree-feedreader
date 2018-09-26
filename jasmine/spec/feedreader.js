@@ -93,14 +93,14 @@ $(function() {
          });
 
          it('completes work when the loadFeed function is called and there is at least a single entry element', function(){
-            const feed = document.querySelector('.feed');
-            expect(feed.children.length >0).toBe(true);
+            expect($('.feed, .entry').children.length > 0).toBe(true);
          });
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
         const feed = document.querySelector('.feed');
         const firstFeed = [];
+        const secondFeed = [];
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
@@ -110,12 +110,17 @@ $(function() {
             Array.from(feed.children).forEach(entry => {
                 firstFeed.push(entry.innerText);
             });
-            loadFeed(1, done);
+            loadFeed(1, function() {
+                Array.from(feed.children).forEach(entry => {
+                    secondFeed.push(entry.innerText);
+                    done();
+                });
+            });
          });
 
          it('changes content when a new feed is loaded by the loadFeed function', function() {
             Array.from(feed.children).forEach((entry, index) => {
-                expect(entry.innerText === firstFeed[index]).toBe(false);
+                expect(secondFeed[index] === firstFeed[index]).toBe(false);
             });
         });
     });
