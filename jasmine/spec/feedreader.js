@@ -106,9 +106,10 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
          beforeEach(done => {
-            loadFeed(0);
+            loadFeed(0, function () {
             Array.from(feed.children).forEach(entry => {
                 firstFeed.push(entry.innerText);
+                });
             });
             loadFeed(1, function() {
                 Array.from(feed.children).forEach(entry => {
