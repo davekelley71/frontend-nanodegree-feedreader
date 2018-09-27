@@ -99,8 +99,8 @@ $(function() {
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
         const feed = document.querySelector('.feed');
-        const firstFeed = [];
-        const secondFeed = [];
+        let firstFeed = [];
+        let secondFeed = [];
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
@@ -121,8 +121,9 @@ $(function() {
 
          it('changes content when a new feed is loaded by the loadFeed function', function() {
             Array.from(feed.children).forEach((entry, index) => {
-                expect(secondFeed[index] === firstFeed[index]).toBe(false);
-            });
+                expect(firstFeed).not.toEqual(secondFeed);
+                console.log(firstFeed, secondFeed);
+             });   
         });
     });
 }());
